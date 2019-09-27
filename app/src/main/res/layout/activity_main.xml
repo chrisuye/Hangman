@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/home_ll"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+        <Button
+            android:id="@+id/registration"
+            android:layout_width="wrap_content"
+            android:text="Register"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:text="log in"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/registration_layout"
+        android:visibility="gone"
+        layout="@layout/user_registration"/>
+    <include
+        android:id="@+id/login_layout"
+        android:visibility="gone"
+        layout="@layout/login"/>
+    <include
+        android:id="@+id/choice_layout"
+        android:visibility="gone"
+        layout="@layout/choice"/>
+    <include
+        android:id="@+id/settings_layout"
+        android:visibility="gone"
+        layout="@layout/settings"/>
+    <include
+        android:id="@+id/background_layout"
+        android:visibility="gone"
+        layout="@layout/background"/>
+
+</RelativeLayout>
