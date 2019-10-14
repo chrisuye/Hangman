@@ -10,11 +10,7 @@
         android:hint="UserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/email"
-        android:hint="Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/password_registration"
         android:hint="Password"

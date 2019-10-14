@@ -6,10 +6,10 @@
     android:layout_margin="15dp">
 
     <EditText
-        android:id="@+id/login_email"
-        android:hint="Email"
+        android:id="@+id/login_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Username" />
     <EditText
         android:id="@+id/login_password"
         android:hint="Password"

@@ -47,5 +47,9 @@
         android:id="@+id/background_layout"
         android:visibility="gone"
         layout="@layout/background"/>
+    <include
+        android:id="@+id/game_layout"
+        android:visibility="gone"
+        layout="@layout/game_layout"/>
 
 </RelativeLayout>
