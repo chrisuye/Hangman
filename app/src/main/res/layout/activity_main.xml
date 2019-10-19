@@ -27,29 +27,5 @@
 
     </LinearLayout>
 
-    <include
-        android:id="@+id/registration_layout"
-        android:visibility="gone"
-        layout="@layout/user_registration"/>
-    <include
-        android:id="@+id/login_layout"
-        android:visibility="gone"
-        layout="@layout/login"/>
-    <include
-        android:id="@+id/choice_layout"
-        android:visibility="gone"
-        layout="@layout/choice"/>
-    <include
-        android:id="@+id/settings_layout"
-        android:visibility="gone"
-        layout="@layout/settings"/>
-    <include
-        android:id="@+id/background_layout"
-        android:visibility="gone"
-        layout="@layout/background"/>
-    <include
-        android:id="@+id/game_layout"
-        android:visibility="gone"
-        layout="@layout/game_layout"/>
 
 </RelativeLayout>

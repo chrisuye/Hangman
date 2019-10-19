@@ -3,25 +3,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/login"
     android:layout_margin="15dp">
 
     <EditText
-        android:id="@+id/name"
-        android:hint="UserName"
+        android:id="@+id/login_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:hint="Username" />
     <EditText
-        android:id="@+id/password_registration"
+        android:id="@+id/login_password"
         android:hint="Password"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
-        android:id="@+id/save"
+        android:id="@+id/login_button"
+        android:text="log in"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
-        android:text="save"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
