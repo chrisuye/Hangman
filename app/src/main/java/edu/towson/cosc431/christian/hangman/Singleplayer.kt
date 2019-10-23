@@ -13,6 +13,17 @@ class Singleplayer : AppCompatActivity() {
 
         fiveletter_btn.setOnClickListener {
             val intent = Intent(this, Singlegame::class.java)
+            intent.putExtra("Letter", 5)
+            startActivity(intent)
+        }
+        sevenletter_btn.setOnClickListener {
+            val intent = Intent(this, Singlegame::class.java)
+            intent.putExtra("Letter", 7)
+            startActivity(intent)
+        }
+        nineletter_btn.setOnClickListener {
+            val intent = Intent(this, Singlegame::class.java)
+            intent.putExtra("Letter", 9)
             startActivity(intent)
         }
     }
