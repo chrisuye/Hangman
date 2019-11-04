@@ -15,6 +15,8 @@ class Background : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_background)
 
+        //recycleview.setBackgroundColor(Color.BLUE)
+
          red_btn.setOnClickListener{
             background_layout.setBackgroundColor(Color.RED)
             registration_layout.setBackgroundColor(Color.RED)

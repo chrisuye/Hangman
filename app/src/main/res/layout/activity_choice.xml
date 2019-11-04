@@ -21,6 +21,12 @@
         android:text="two player" />
 
     <Button
+        android:id="@+id/custom_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="custom game" />
+
+    <Button
         android:id="@+id/score_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

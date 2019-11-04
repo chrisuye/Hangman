@@ -19,5 +19,13 @@ class Choice : AppCompatActivity() {
             val intent = Intent(this, Singleplayer::class.java)
             startActivity(intent)
         }
+        score_btn.setOnClickListener {
+            val intent = Intent(this, Score::class.java)
+            startActivity(intent)
+        }
+        custom_btn.setOnClickListener {
+            val intent = Intent(this, CustomInput::class.java)
+            startActivity(intent)
+        }
     }
 }

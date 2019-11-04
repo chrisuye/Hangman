@@ -19,6 +19,7 @@ class Login : AppCompatActivity() {
         handler = DatabaseHelper(this)
 
         login_button.setOnClickListener {
+            //Todo make sure that username and password is not null
             if (handler.userPresent(login_name.text.toString(), login_password.text.toString())){
                 Toast.makeText(this,"Login Success", Toast.LENGTH_SHORT).show()
 

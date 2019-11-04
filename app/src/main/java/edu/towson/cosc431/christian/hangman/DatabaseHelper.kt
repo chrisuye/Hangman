@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 
 class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory, version) {
     override fun onCreate(p0: SQLiteDatabase?) {
@@ -39,9 +40,46 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory
         }
     }
 
+    fun userNamePresent(name: String):Boolean{
+        val db=writableDatabase
+        val query="select * from user where name = '$name'"
+        val cursor=db.rawQuery(query, null)
+        if (cursor.count <= 0){
+            cursor.close()
+            return true
+        }
+        else{
+            cursor.close()
+            return false
+        }
+    }
+    fun getName() : ArrayList<Table>{
+        val query = "select * from user"
+        val db = readableDatabase
+        val cursor = db.rawQuery(query,null)
+        val users = ArrayList<Table>()
+
+        if (cursor.count <= 0){
+            //Toast.makeText(mCtx,"No Recored", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            while (cursor.moveToNext()){
+                val user = Table()
+                user.username = cursor.getString(cursor.getColumnIndex("name"))
+
+                users.add(user)
+            }
+        }
+        cursor.close()
+        db.close()
+        return users
+
+    }
+
     companion object {
         internal val dbname = "userDB"
         internal val factory = null
         internal val version = 1
     }
+
 }
