@@ -7,23 +7,23 @@ import edu.towson.cosc431.christian.hangman.Interface.IGameRepo
 import kotlinx.android.synthetic.main.fragment_hangman_game.*
 import kotlinx.android.synthetic.main.fragment_hangman_image.*
 
-class CustomGame : AppCompatActivity() {
+class TwoPlayer : AppCompatActivity() {
 
-    lateinit var gamecheck:IGameRepo
+    lateinit var gamecheck: IGameRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_game)
+        setContentView(R.layout.activity_two_player)
 
-        //var count = 0
-        //var flag = true
+        val intent = intent
+
+        val word = intent.getStringExtra("Word")
+
 
         gamecheck = GameRepo(this)
 
 
-        val intent = intent
-        val word = intent.getStringExtra("Word")
-        println(word)
+
         var letters : String = ""
         var wordview = ""
         //val game = word.length
@@ -103,64 +103,6 @@ class CustomGame : AppCompatActivity() {
                 Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
             }
 
-
-
-
-
-            /*flag = true
-            count = 0
-            val lettersarray = letters.toCharArray()
-
-
-
-            val guess = guess_input.text.toString()
-            if (guess.length == 1){
-
-                for (n in lettersarray){
-                    if (n.equals(guess)){
-                        Toast.makeText(this, "letter already used", Toast.LENGTH_SHORT).show()
-                        break
-                    }
-                }
-
-                letters= letters + guess + ", "
-                showtry_view.text = letters
-
-
-                for (elm in wordarry){
-                    if (guess.equals(elm.toString())){
-
-
-                        flag = false
-                        val wordviewarray = wordview.toCharArray()
-                        wordviewarray.set(count, elm)
-                        wordview = ""
-
-                        for (i in wordviewarray){
-                            wordview = wordview + i.toString()
-                        }
-
-                        word_view.text = wordview
-
-                        wincount++
-                    }
-                    count++
-
-                }
-
-                //Todo show win here
-                if (wincount == game){
-                    Toast.makeText(this, "You have won!!!", Toast.LENGTH_SHORT).show()
-                }
-
-                if (flag){
-                    Toast.makeText(this, "Wrong letter", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-            else{
-                Toast.makeText(this, "ONLY ONE LETTER!", Toast.LENGTH_LONG).show()
-            }*/
         }
     }
 }

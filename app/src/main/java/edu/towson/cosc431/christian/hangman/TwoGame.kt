@@ -8,14 +8,13 @@ import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 
-class Singleplayer : AppCompatActivity() {
+class TwoGame : AppCompatActivity() {
 
     var list = ArrayList<Words>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_singleplayer)
-
+        setContentView(R.layout.activity_two_game)
 
 
         val urlarry = arrayOf("https://www.wordgamedictionary.com/word-lists/5-letter-words/5-letter-words.json",
@@ -103,7 +102,7 @@ class Singleplayer : AppCompatActivity() {
         //return list[j].word
 
         if (list[j].word.isNotEmpty()) {
-            val intent = Intent(this, Singlegame::class.java)
+            val intent = Intent(this, TwoPlayer::class.java)
             intent.putExtra("Word", list[j].word)
             startActivity(intent)
         }

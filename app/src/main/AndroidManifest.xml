@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CustomGame"></activity>
+        <activity android:name=".TwoPlayer"></activity>
+        <activity android:name=".TwoGame" />
+        <activity android:name=".CustomGame" />
         <activity android:name=".CustomInput" />
         <activity android:name=".Score" />
         <activity android:name=".Singlegame" />

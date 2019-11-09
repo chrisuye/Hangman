@@ -16,6 +16,8 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    //Todo use an interface for the ones below
+
     fun insertUserData( name:String,password:String){
         val db: SQLiteDatabase = writableDatabase
         val values: ContentValues = ContentValues()

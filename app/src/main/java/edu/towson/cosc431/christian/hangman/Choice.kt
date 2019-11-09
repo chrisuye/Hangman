@@ -27,5 +27,11 @@ class Choice : AppCompatActivity() {
             val intent = Intent(this, CustomInput::class.java)
             startActivity(intent)
         }
+        two_btn.setOnClickListener {
+
+            val intent = Intent(this, TwoGame::class.java)
+            startActivity(intent)
+
+        }
     }
 }

@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class Login : AppCompatActivity() {
     lateinit var handler:DatabaseHelper
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -17,6 +18,8 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         handler = DatabaseHelper(this)
+
+
 
         login_button.setOnClickListener {
             //Todo make sure that username and password is not null
@@ -27,6 +30,8 @@ class Login : AppCompatActivity() {
                 startActivity(intent)
 
             }
+            //currentplayer = Player(-1, login_name.text.toString(), login_password.text.toString(), 0, 0)
+
             else
                 Toast.makeText(this,"Login Fail", Toast.LENGTH_SHORT).show()
 
