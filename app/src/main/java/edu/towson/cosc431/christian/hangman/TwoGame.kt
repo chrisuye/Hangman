@@ -12,6 +12,7 @@ class TwoGame : AppCompatActivity() {
 
     var list = ArrayList<Words>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_two_game)
@@ -82,8 +83,12 @@ class TwoGame : AppCompatActivity() {
         val jsonArray = JSONArray(jsonString)
 
         var i = 0
+        val words:String
 
-        while (i < 200) {
+        val rand = (0..jsonArray.length()).random()
+        words = jsonArray.getJSONObject(rand).getString("word")
+
+        /*while (i < 100000) {
 
             val jsonObject = jsonArray.getJSONObject(i)
             list.add(
@@ -99,11 +104,11 @@ class TwoGame : AppCompatActivity() {
         // println(wordhandler.getWord(select))
         val j = (0..list.size).random()
         println("wwww wwwwwwwww "+list[j].word)
-        //return list[j].word
+        //return list[j].word*/
 
-        if (list[j].word.isNotEmpty()) {
+        if (words.isNotEmpty()) {
             val intent = Intent(this, TwoPlayer::class.java)
-            intent.putExtra("Word", list[j].word)
+            intent.putExtra("Word", words)
             startActivity(intent)
         }
 

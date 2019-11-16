@@ -83,8 +83,12 @@ class Singleplayer : AppCompatActivity() {
         val jsonArray = JSONArray(jsonString)
 
         var i = 0
+        val words:String
 
-        while (i < 200) {
+        val rand = (0..jsonArray.length()).random()
+        words = jsonArray.getJSONObject(rand).getString("word")
+
+        /*while (i < 200) {
 
             val jsonObject = jsonArray.getJSONObject(i)
             list.add(
@@ -100,15 +104,16 @@ class Singleplayer : AppCompatActivity() {
         // println(wordhandler.getWord(select))
         val j = (0..list.size).random()
         println("wwww wwwwwwwww "+list[j].word)
-        //return list[j].word
+        //return list[j].word*/
 
-        if (list[j].word.isNotEmpty()) {
+        println("eeeeeeeee  eee "+ words)
+
+        if (words.isNotEmpty()) {
             val intent = Intent(this, Singlegame::class.java)
-            intent.putExtra("Word", list[j].word)
+            intent.putExtra("Word", words)
             startActivity(intent)
         }
 
-        //word_text.text = wordhandler.getWord()
 
 
 

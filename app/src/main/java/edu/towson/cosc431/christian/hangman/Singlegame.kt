@@ -1,9 +1,15 @@
 package edu.towson.cosc431.christian.hangman
 
+import android.app.AlertDialog
+import android.app.Notification
+import android.app.NotificationManager
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.NotificationManagerCompat
 import edu.towson.cosc431.christian.hangman.Interface.IGameRepo
+import edu.towson.cosc431.christian.hangman.Interface.IGameTech
 import edu.towson.cosc431.christian.hangman.Interface.IWord
 import kotlinx.android.synthetic.main.activity_singlegame.*
 import kotlinx.android.synthetic.main.fragment_hangman_game.*
@@ -14,11 +20,19 @@ import java.io.IOException
 
 class Singlegame : AppCompatActivity() {
 
+    lateinit var gameHint:IGameTech
     lateinit var gamecheck: IGameRepo
+    private var backPress:Long = 0
+    var backtrace = 0
+    var hintcount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_singlegame)
+
+        val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
+        val dialogB = AlertDialog.Builder(layoutInflater.context)
+        val diaogBb = AlertDialog.Builder(layoutInflater.context)
 
         val intent = intent
 
@@ -26,6 +40,7 @@ class Singlegame : AppCompatActivity() {
 
 
         gamecheck = GameRepo(this)
+        gameHint = GameTech()
 
 
 
@@ -44,6 +59,7 @@ class Singlegame : AppCompatActivity() {
         try_btn.setOnClickListener {
 
             val guess = guess_input.text.toString()
+            guess_input.setText("")
 
             if (gamecheck.inputCount(guess)){
 
@@ -89,7 +105,61 @@ class Singlegame : AppCompatActivity() {
                             11 -> imageView.setImageResource(R.drawable.eleven)
                             12 -> {
                                 imageView.setImageResource(R.drawable.twelve)
+
+                                val note = Notification.Builder(this)
+
+                                note.setContentTitle("Score")
+
+                                note.setContentText("This will tell you if u won or lost")
+
+                                val manager = NotificationManagerCompat.from(this)
+                                manager.notify(1, note.build())
+
+
                                 Toast.makeText(this, "GAME OVER!!!!!", Toast.LENGTH_SHORT).show()
+
+                                dialogBuilder.setMessage("GAME OVER, would you like to try again?")
+
+                                    .setCancelable(false)
+
+                                    .setPositiveButton("Try Again", DialogInterface.OnClickListener {
+                                            dialog, id ->
+                                        wrongcount = 0
+                                        imageView.setImageResource(R.drawable.one)
+                                        wordview = ""
+                                        for (elm in wordarry){
+                                            wordview = wordview + "_"
+                                        }
+                                        letters = ""
+                                        word_view.text = wordview
+                                        showtry_view.text = letters
+                                    })
+
+                                    .setNegativeButton("No", DialogInterface.OnClickListener {
+                                            dialog, id -> dialog.cancel()
+                                        dialogB.setMessage(word)
+                                            .setCancelable(false)
+                                            .setPositiveButton("Okay", DialogInterface.OnClickListener {
+                                                    dialog, which ->
+                                                backtrace = 1
+                                                dialog.cancel()  })
+
+                                        val alerttwo = dialogB.create()
+                                        alerttwo.setTitle("The word was")
+                                        alerttwo.show()
+
+
+
+                                    })
+
+
+                                val alert = dialogBuilder.create()
+
+                                alert.setTitle("Custom Game")
+
+                                alert.show()
+
+
                             }
 
                         }
@@ -106,8 +176,142 @@ class Singlegame : AppCompatActivity() {
 
             if (gamecheck.winGame(wordview)){
                 Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
+
+                val note = Notification.Builder(this)
+
+                note.setContentTitle("Score")
+
+                note.setContentText("This will tell you if u won or lost")
+
+                val manager = NotificationManagerCompat.from(this)
+                manager.notify(1, note.build())
+
+
+                diaogBb.setMessage("WINNER! The word was, " + word)
+
+                    .setCancelable(false)
+
+                    .setPositiveButton("Great", DialogInterface.OnClickListener {
+                            dialog, id ->
+                        backtrace = 1
+                        dialog.cancel()
+                    })
+
+
+
+                val alert = diaogBb.create()
+
+                alert.setTitle("Custom Game")
+
+                alert.show()
             }
 
+        }
+
+        hint_btn.setOnClickListener {
+            when(hintcount){
+                3 -> {
+                    Toast.makeText(this, "No more hints", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    val temphint = gameHint.hint(wordview,word)
+                    if (temphint != null){
+                        wordview = temphint
+                        word_view.text = wordview
+
+                        if (gamecheck.winGame(wordview)){
+                            Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
+
+                            val note = Notification.Builder(this)
+
+                            note.setContentTitle("Score")
+
+                            note.setContentText("This will tell you if u won or lost")
+
+                            val manager = NotificationManagerCompat.from(this)
+                            manager.notify(1, note.build())
+
+
+                            diaogBb.setMessage("WINNER! The word was, " + word)
+
+                                .setCancelable(false)
+
+                                .setPositiveButton("Great", DialogInterface.OnClickListener {
+                                        dialog, id ->
+                                    backtrace = 1
+                                    dialog.cancel()
+                                })
+
+
+
+                            val alert = diaogBb.create()
+
+                            alert.setTitle("Custom Game")
+
+                            alert.show()
+                        }
+                    }else {
+                        Toast.makeText(this, "No", Toast.LENGTH_SHORT).show()
+                    }
+
+                    hintcount++
+
+
+                }
+            }
+        }
+
+        restart_btn.setOnClickListener {
+            wordview = ""
+            for (elm in wordarry){
+                wordview = wordview + "_"
+            }
+
+            word_view.text = wordview
+            imageView.setImageResource(R.drawable.one)
+            letters = ""
+            showtry_view.text = letters
+            hintcount = 0
+            backtrace = 0
+            guess_input.setText("")
+        }
+
+    }
+
+    override fun onBackPressed() {
+
+        val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
+
+
+        when(backtrace){
+            0 -> {
+                dialogBuilder.setMessage("Are you sure?")
+
+                    .setCancelable(false)
+
+                    .setPositiveButton("Stay", DialogInterface.OnClickListener {
+                            dialog, id -> dialog.cancel()
+                    })
+                    .setNegativeButton("Quit", DialogInterface.OnClickListener {
+                            dialog, id ->
+                        backtrace = 1
+                        onBackPressed()
+                        dialog.cancel()
+                    })
+
+
+
+                val alert = dialogBuilder.create()
+
+                alert.setTitle("Custom Game")
+
+                alert.show()
+
+            }
+            1 -> {
+                super.onBackPressed()
+                return
+            }
         }
 
     }

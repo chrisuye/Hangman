@@ -4,12 +4,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.widget.Toast
 
-class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory, version) {
+class UserDataBase(context: Context): SQLiteOpenHelper(context,dbname, factory, version) {
     override fun onCreate(p0: SQLiteDatabase?) {
         p0?.execSQL("create table user (id integer primary key autoincrement,"+
-                "name varchar(30), password varchar(20))")
+                "name varchar(30), password varchar(20), win varchar(20), loss varchar(20))")
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -23,6 +22,8 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory
         val values: ContentValues = ContentValues()
         values.put("name",name)
         values.put("password",password)
+        values.put("win", "0")
+        values.put("loss", "0")
 
         db.insert("user",null, values)
         db.close()
@@ -37,6 +38,7 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory
             return false
         }
         else{
+            track = name
             cursor.close()
             return true
         }
@@ -61,16 +63,15 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory
         val cursor = db.rawQuery(query,null)
         val users = ArrayList<Table>()
 
-        if (cursor.count <= 0){
-            //Toast.makeText(mCtx,"No Recored", Toast.LENGTH_SHORT).show()
-        }
-        else{
-            while (cursor.moveToNext()){
+        if(cursor.moveToFirst()){
+            do{
                 val user = Table()
                 user.username = cursor.getString(cursor.getColumnIndex("name"))
+                user.win = cursor.getString(cursor.getColumnIndex("win"))
+                user.loss = cursor.getString(cursor.getColumnIndex("loss"))
 
                 users.add(user)
-            }
+            }while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
@@ -78,10 +79,36 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper (context,dbname, factory
 
     }
 
+    /*fun updateWin(){
+
+        val db=writableDatabase
+        val query="select * from user"
+        val cursor=db.rawQuery(query, null)
+
+        if(cursor.moveToFirst()){
+            do {
+                if (cursor.getString(cursor.getColumnIndex("name")) == track){
+                    var wins = cursor.getString(cursor.getColumnIndex("win")).toInt()
+                    wins++
+
+                    val cv = ContentValues()
+                    cv.put("win", wins.toString())
+                    db.update("user", cv, "id =? AND name +?", "d")
+                }
+
+
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+
+
+    }*/
+
     companion object {
         internal val dbname = "userDB"
         internal val factory = null
         internal val version = 1
-    }
 
+        internal var track:String = ""
+    }
 }

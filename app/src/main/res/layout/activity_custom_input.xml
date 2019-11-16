@@ -10,6 +10,7 @@
         android:id="@+id/word_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="250dp"
         android:ems="10"
         android:hint="Input Word"
         android:inputType="textPersonName"
@@ -20,38 +21,38 @@
         app:layout_constraintVertical_bias="0.405" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/hintone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="Hint 1"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/word_input" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/hinttwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Hint 2"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/hintone" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/hintthree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Hint 3"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/hinttwo" />
 
     <Button
         android:id="@+id/start_btn"
@@ -60,5 +61,5 @@
         android:text="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/hintthree" />
 </androidx.constraintlayout.widget.ConstraintLayout>

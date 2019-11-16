@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.score.view.*
 
-class MainAdapter(val names:ArrayList<Table>, val scores:ArrayList<ScoreTable>): RecyclerView.Adapter<CustomViewHolder>() {
+class MainAdapter(val names:ArrayList<Table>): RecyclerView.Adapter<CustomViewHolder>() {
 
 
     override fun getItemCount(): Int {
-        return scores.size
+
+        return names.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -21,10 +22,10 @@ class MainAdapter(val names:ArrayList<Table>, val scores:ArrayList<ScoreTable>):
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val name = names[position]
-        val score = scores[position]
+
         holder?.view?.nameview.text = name.username
-        holder?.view?.winview.text = "Win = " + score.win.toString()
-        holder?.view?.lossview.text = "Loss = " + score.loss.toString()
+        holder?.view?.winview.text = "Win = " + name.win
+        holder?.view?.lossview.text = "Loss = " + name.loss
     }
 
 }
