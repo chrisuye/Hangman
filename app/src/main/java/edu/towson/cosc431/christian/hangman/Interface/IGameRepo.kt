@@ -7,4 +7,5 @@ interface IGameRepo {
     fun letterUsed (input: String, letter:String):Boolean
     fun checkWord (input: String, word:String): Boolean
     fun winGame (worddisplay:String):Boolean
+    fun playerChange (idx:Int):String
 }

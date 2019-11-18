@@ -39,7 +39,7 @@ class Singlegame : AppCompatActivity() {
         val word = intent.getStringExtra("Word")
 
 
-        gamecheck = GameRepo(this)
+        gamecheck = GameRepo()
         gameHint = GameTech()
 
 

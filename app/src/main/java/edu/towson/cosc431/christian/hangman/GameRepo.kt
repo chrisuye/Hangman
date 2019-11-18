@@ -1,11 +1,10 @@
 package edu.towson.cosc431.christian.hangman
 
-import android.content.Context
+
 import edu.towson.cosc431.christian.hangman.Interface.IGameRepo
 
-class GameRepo(ctx:Context):IGameRepo{
+class GameRepo:IGameRepo{
 
-    var num: MutableList<Player> = mutableListOf()
 
     override fun inputCount(input: String): Boolean {
         if(input.length > 1){
@@ -46,6 +45,13 @@ class GameRepo(ctx:Context):IGameRepo{
             }
         }
         return true
+    }
+
+    override fun playerChange(idx: Int): String {
+        when (idx % 2){
+            0 -> return "Player One"
+        }
+        return "Player Two"
     }
 
 }

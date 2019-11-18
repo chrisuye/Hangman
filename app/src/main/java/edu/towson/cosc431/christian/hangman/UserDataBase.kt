@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class UserDataBase(context: Context): SQLiteOpenHelper(context,dbname, factory, version) {
     override fun onCreate(p0: SQLiteDatabase?) {
         p0?.execSQL("create table user (id integer primary key autoincrement,"+
-                "name varchar(30), password varchar(20), win varchar(20), loss varchar(20))")
+                "name varchar(30), password varchar(20))")
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -22,15 +22,15 @@ class UserDataBase(context: Context): SQLiteOpenHelper(context,dbname, factory, 
         val values: ContentValues = ContentValues()
         values.put("name",name)
         values.put("password",password)
-        values.put("win", "0")
-        values.put("loss", "0")
+        //values.put("win", "0")
+        //values.put("loss", "0")
 
         db.insert("user",null, values)
         db.close()
     }
 
     fun userPresent(name: String, password: String):Boolean{
-        val db=writableDatabase
+        val db= readableDatabase
         val query="select * from user where name = '$name' and password = '$password'"
         val cursor=db.rawQuery(query, null)
         if (cursor.count <= 0){
@@ -45,7 +45,7 @@ class UserDataBase(context: Context): SQLiteOpenHelper(context,dbname, factory, 
     }
 
     fun userNamePresent(name: String):Boolean{
-        val db=writableDatabase
+        val db= readableDatabase
         val query="select * from user where name = '$name'"
         val cursor=db.rawQuery(query, null)
         if (cursor.count <= 0){
@@ -64,14 +64,18 @@ class UserDataBase(context: Context): SQLiteOpenHelper(context,dbname, factory, 
         val users = ArrayList<Table>()
 
         if(cursor.moveToFirst()){
-            do{
-                val user = Table()
-                user.username = cursor.getString(cursor.getColumnIndex("name"))
-                user.win = cursor.getString(cursor.getColumnIndex("win"))
-                user.loss = cursor.getString(cursor.getColumnIndex("loss"))
+            if (cursor != null && cursor.count > 0) {
+                do {
+                    val user = Table()
+                    user.username = cursor.getString(cursor.getColumnIndex("name"))
+                    user.win = "0"
+                    user.loss = "0"
+                    //user.win = cursor.getString(cursor.getColumnIndex("win"))
+                    //user.loss = cursor.getString(cursor.getColumnIndex("loss"))
 
-                users.add(user)
-            }while (cursor.moveToNext())
+                    users.add(user)
+                } while (cursor.moveToNext())
+            }
         }
         cursor.close()
         db.close()

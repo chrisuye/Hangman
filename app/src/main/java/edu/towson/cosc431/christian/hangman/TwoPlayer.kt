@@ -18,6 +18,7 @@ class TwoPlayer : AppCompatActivity() {
     lateinit var gameHint:IGameTech
     var backtrace = 0
     var hintcount = 0
+    var play = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +34,10 @@ class TwoPlayer : AppCompatActivity() {
         val word = intent.getStringExtra("Word")
 
 
-        gamecheck = GameRepo(this)
+        gamecheck = GameRepo()
         gameHint = GameTech()
+
+        player_view.text = gamecheck.playerChange(play)
 
 
 
@@ -85,6 +88,8 @@ class TwoPlayer : AppCompatActivity() {
 
                     }
                     else {
+                        play++
+                        player_view.text = gamecheck.playerChange(play)
                         wrongcount++
                         Toast.makeText(this, "Wrong letter", Toast.LENGTH_SHORT).show()
                         when(wrongcount){
@@ -158,7 +163,7 @@ class TwoPlayer : AppCompatActivity() {
             if (gamecheck.winGame(wordview)){
                 Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
 
-                diaogBb.setMessage("WINNER! The word was, " + word)
+                diaogBb.setMessage(gamecheck.playerChange(play)+", WINNER! The word was, " + word)
 
                     .setCancelable(false)
 
@@ -201,7 +206,7 @@ class TwoPlayer : AppCompatActivity() {
                             manager.notify(1, note.build())
 
 
-                            diaogBb.setMessage("WINNER! The word was, " + word)
+                            diaogBb.setMessage(gamecheck.playerChange(play) +", WINNER! The word was, " + word)
 
                                 .setCancelable(false)
 
@@ -243,6 +248,8 @@ class TwoPlayer : AppCompatActivity() {
             hintcount = 0
             backtrace = 0
             guess_input.setText("")
+            play = 0
+            player_view.text = gamecheck.playerChange(play)
         }
     }
 

@@ -27,7 +27,7 @@ class CustomGame : AppCompatActivity() {
 
         player_view.text = "Welcome to HangMan"
 
-        gamecheck = GameRepo(this)
+        gamecheck = GameRepo()
         gameHint = GameTech()
 
         val dialogBuilder = AlertDialog.Builder(layoutInflater.context)

@@ -56,14 +56,14 @@ class Registration : AppCompatActivity() {
 
                         builder = Notification.Builder(this, channelId)
                             .setContentTitle("HangMan")
-                            .setContentText("Welcome new "+name.text)
+                            .setContentText("Welcome "+name.text)
                             .setSmallIcon(R.drawable.ic_launcher_round)
                             .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher))
                             //.setContentIntent(pendingIntent)
                     }else{
                         builder = Notification.Builder(this)
                             .setContentTitle("HangMan")
-                            .setContentText("Welcome new player")
+                            .setContentText("Welcome " +name.text)
                             .setSmallIcon(R.drawable.ic_launcher_round)
                             .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher))
                             //.setContentIntent(pendingIntent)
