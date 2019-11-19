@@ -1,6 +1,7 @@
 package edu.towson.cosc431.christian.hangman
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_singleplayer.*
@@ -16,13 +17,23 @@ class Singleplayer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_singleplayer)
 
+        val intent = intent
+        val colorChange = intent.getIntExtra("color",0)
+
+        when(colorChange){
+            0 -> singleplayer_layout.setBackgroundColor(Color.WHITE)
+            1 -> singleplayer_layout.setBackgroundColor(Color.RED)
+            2 -> singleplayer_layout.setBackgroundColor(Color.BLUE)
+            3 -> singleplayer_layout.setBackgroundColor(Color.BLACK)
+        }
+
 
 
         val urlarry = arrayOf("https://www.wordgamedictionary.com/word-lists/5-letter-words/5-letter-words.json",
             "https://www.wordgamedictionary.com/word-lists/7-letter-words/7-letter-words.json",
             "https://www.wordgamedictionary.com/word-lists/9-letter-words/9-letter-words.json")
 
-        var select = 0
+
 
 
 
@@ -46,7 +57,6 @@ class Singleplayer : AppCompatActivity() {
     fun fetchjson(go:String?) {
         println("hey it works")
 
-        var wol:String = ""
 
         val url = go
 
@@ -78,33 +88,16 @@ class Singleplayer : AppCompatActivity() {
 
     fun jsonparse(jsonString: String?) {
 
-        //Todo fix the problem with getting the world
+
 
         val jsonArray = JSONArray(jsonString)
 
-        var i = 0
+
         val words:String
 
         val rand = (0..jsonArray.length()).random()
         words = jsonArray.getJSONObject(rand).getString("word")
 
-        /*while (i < 200) {
-
-            val jsonObject = jsonArray.getJSONObject(i)
-            list.add(
-                Words(
-                    jsonObject.getString("word")
-                )
-            )
-            /* wordhandler.addWord(Words(
-                 jsonObject.getString("word")
-             ), select)*/
-            i++
-        }
-        // println(wordhandler.getWord(select))
-        val j = (0..list.size).random()
-        println("wwww wwwwwwwww "+list[j].word)
-        //return list[j].word*/
 
         println("eeeeeeeee  eee "+ words)
 

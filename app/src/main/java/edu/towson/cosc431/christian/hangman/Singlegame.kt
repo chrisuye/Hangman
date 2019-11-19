@@ -2,7 +2,6 @@ package edu.towson.cosc431.christian.hangman
 
 import android.app.AlertDialog
 import android.app.Notification
-import android.app.NotificationManager
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,13 +9,8 @@ import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import edu.towson.cosc431.christian.hangman.Interface.IGameRepo
 import edu.towson.cosc431.christian.hangman.Interface.IGameTech
-import edu.towson.cosc431.christian.hangman.Interface.IWord
-import kotlinx.android.synthetic.main.activity_singlegame.*
 import kotlinx.android.synthetic.main.fragment_hangman_game.*
 import kotlinx.android.synthetic.main.fragment_hangman_image.*
-import okhttp3.*
-import org.json.JSONArray
-import java.io.IOException
 
 class Singlegame : AppCompatActivity() {
 

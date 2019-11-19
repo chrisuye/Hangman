@@ -1,9 +1,15 @@
 package edu.towson.cosc431.christian.hangman
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_choice.*
 import kotlinx.android.synthetic.main.activity_singleplayer.*
+import kotlinx.android.synthetic.main.activity_singleplayer.fiveletter_btn
+import kotlinx.android.synthetic.main.activity_singleplayer.nineletter_btn
+import kotlinx.android.synthetic.main.activity_singleplayer.sevenletter_btn
+import kotlinx.android.synthetic.main.activity_two_game.*
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
@@ -17,12 +23,20 @@ class TwoGame : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_two_game)
 
+        val intent = intent
+        val colorChange = intent.getIntExtra("color", 0)
+
+        when(colorChange){
+            0 -> two_layout.setBackgroundColor(Color.WHITE)
+            1 -> two_layout.setBackgroundColor(Color.RED)
+            2 -> two_layout.setBackgroundColor(Color.BLUE)
+            3 -> two_layout.setBackgroundColor(Color.BLACK)
+        }
+
 
         val urlarry = arrayOf("https://www.wordgamedictionary.com/word-lists/5-letter-words/5-letter-words.json",
             "https://www.wordgamedictionary.com/word-lists/7-letter-words/7-letter-words.json",
             "https://www.wordgamedictionary.com/word-lists/9-letter-words/9-letter-words.json")
-
-        var select = 0
 
 
 
@@ -46,7 +60,6 @@ class TwoGame : AppCompatActivity() {
     fun fetchjson(go:String?) {
         println("hey it works")
 
-        var wol:String = ""
 
         val url = go
 
@@ -78,43 +91,17 @@ class TwoGame : AppCompatActivity() {
 
     fun jsonparse(jsonString: String?) {
 
-        //Todo fix the problem with getting the world
-
         val jsonArray = JSONArray(jsonString)
-
-        var i = 0
         val words:String
 
         val rand = (0..jsonArray.length()).random()
         words = jsonArray.getJSONObject(rand).getString("word")
-
-        /*while (i < 100000) {
-
-            val jsonObject = jsonArray.getJSONObject(i)
-            list.add(
-                Words(
-                    jsonObject.getString("word")
-                )
-            )
-            /* wordhandler.addWord(Words(
-                 jsonObject.getString("word")
-             ), select)*/
-            i++
-        }
-        // println(wordhandler.getWord(select))
-        val j = (0..list.size).random()
-        println("wwww wwwwwwwww "+list[j].word)
-        //return list[j].word*/
 
         if (words.isNotEmpty()) {
             val intent = Intent(this, TwoPlayer::class.java)
             intent.putExtra("Word", words)
             startActivity(intent)
         }
-
-        //word_text.text = wordhandler.getWord()
-
-
 
     }
 }
