@@ -1,7 +1,7 @@
 package edu.towson.cosc431.christian.hangman
 
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -19,6 +19,8 @@ class CustomGame : AppCompatActivity() {
     private var backPress:Long = 0
     var backtrace = 0
     var wrongcount = 0
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +59,10 @@ class CustomGame : AppCompatActivity() {
         imageView.setImageResource(R.drawable.one)
 
 
+
+
         try_btn.setOnClickListener {
+
 
             val guess = guess_input.text.toString()
             guess_input.setText("")
