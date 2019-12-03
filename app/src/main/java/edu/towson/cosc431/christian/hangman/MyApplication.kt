@@ -7,6 +7,7 @@ import android.os.Bundle
 class MyApplication : Application(), Application.ActivityLifecycleCallbacks {
 
     var isChoiceActivityVisable:Boolean = false
+    var isChoiceAcivityStoped:Boolean = false
 
     override fun onCreate() {
         super.onCreate()
@@ -34,7 +35,11 @@ class MyApplication : Application(), Application.ActivityLifecycleCallbacks {
     override fun onActivitySaveInstanceState(p0: Activity?, p1: Bundle?) {
     }
 
-    override fun onActivityStopped(p0: Activity?) {
+    override fun onActivityStopped(act: Activity?) {
+
+        if (act is Choice){
+            isChoiceAcivityStoped = true
+        }
     }
 
     override fun onActivityCreated(p0: Activity?, p1: Bundle?) {

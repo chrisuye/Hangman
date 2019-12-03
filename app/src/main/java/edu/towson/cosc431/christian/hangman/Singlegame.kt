@@ -52,7 +52,7 @@ class Singlegame : AppCompatActivity() {
 
         try_btn.setOnClickListener {
 
-            val guess = guess_input.text.toString()
+            val guess = guess_input.text.toString().toLowerCase()
             guess_input.setText("")
 
             if (gamecheck.inputCount(guess)){
@@ -100,15 +100,6 @@ class Singlegame : AppCompatActivity() {
                             12 -> {
                                 imageView.setImageResource(R.drawable.twelve)
 
-                                val note = Notification.Builder(this)
-
-                                note.setContentTitle("Score")
-
-                                note.setContentText("This will tell you if u won or lost")
-
-                                val manager = NotificationManagerCompat.from(this)
-                                manager.notify(1, note.build())
-
 
                                 Toast.makeText(this, "GAME OVER!!!!!", Toast.LENGTH_SHORT).show()
 
@@ -136,6 +127,7 @@ class Singlegame : AppCompatActivity() {
                                             .setPositiveButton("Okay", DialogInterface.OnClickListener {
                                                     dialog, which ->
                                                 backtrace = 1
+                                                onBackPressed()
                                                 dialog.cancel()  })
 
                                         val alerttwo = dialogB.create()
@@ -171,15 +163,6 @@ class Singlegame : AppCompatActivity() {
             if (gamecheck.winGame(wordview)){
                 Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
 
-                val note = Notification.Builder(this)
-
-                note.setContentTitle("Score")
-
-                note.setContentText("This will tell you if u won or lost")
-
-                val manager = NotificationManagerCompat.from(this)
-                manager.notify(1, note.build())
-
 
                 diaogBb.setMessage("WINNER! The word was, " + word)
 
@@ -188,6 +171,7 @@ class Singlegame : AppCompatActivity() {
                     .setPositiveButton("Great", DialogInterface.OnClickListener {
                             dialog, id ->
                         backtrace = 1
+                        onBackPressed()
                         dialog.cancel()
                     })
 
@@ -216,16 +200,6 @@ class Singlegame : AppCompatActivity() {
                         if (gamecheck.winGame(wordview)){
                             Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
 
-                            val note = Notification.Builder(this)
-
-                            note.setContentTitle("Score")
-
-                            note.setContentText("This will tell you if u won or lost")
-
-                            val manager = NotificationManagerCompat.from(this)
-                            manager.notify(1, note.build())
-
-
                             diaogBb.setMessage("WINNER! The word was, " + word)
 
                                 .setCancelable(false)
@@ -233,6 +207,7 @@ class Singlegame : AppCompatActivity() {
                                 .setPositiveButton("Great", DialogInterface.OnClickListener {
                                         dialog, id ->
                                     backtrace = 1
+                                    onBackPressed()
                                     dialog.cancel()
                                 })
 

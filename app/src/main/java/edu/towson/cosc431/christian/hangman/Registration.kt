@@ -32,7 +32,7 @@ class Registration : AppCompatActivity() {
         handler = UserDataBase(this)
 
         save.setOnClickListener{
-            //Todo make sure that username and password is not null
+
 
             if (name.text.toString().isEmpty() || password_registration.text.toString().isEmpty()){
                 Toast.makeText(this,"Missing username and/or password", Toast.LENGTH_SHORT).show()

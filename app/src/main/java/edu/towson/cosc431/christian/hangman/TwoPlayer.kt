@@ -12,6 +12,7 @@ import edu.towson.cosc431.christian.hangman.Interface.IGameTech
 import kotlinx.android.synthetic.main.fragment_hangman_game.*
 import kotlinx.android.synthetic.main.fragment_hangman_image.*
 
+
 class TwoPlayer : AppCompatActivity() {
 
     lateinit var gamecheck: IGameRepo
@@ -27,6 +28,7 @@ class TwoPlayer : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
         val dialogB = AlertDialog.Builder(layoutInflater.context)
         val diaogBb = AlertDialog.Builder(layoutInflater.context)
+        val dialogPlayer = AlertDialog.Builder(layoutInflater.context)
 
 
         val intent = intent
@@ -37,13 +39,13 @@ class TwoPlayer : AppCompatActivity() {
         gamecheck = GameRepo()
         gameHint = GameTech()
 
-        player_view.text = gamecheck.playerChange(play)
+
 
 
 
         var letters : String = ""
         var wordview = ""
-        //val game = word.length
+
         val wordarry = word.toCharArray()
 
         for (elm in wordarry){
@@ -53,11 +55,10 @@ class TwoPlayer : AppCompatActivity() {
         word_view.text = wordview
         var wrongcount = 0
 
-        player_view.text = "Player One"
 
         try_btn.setOnClickListener {
 
-            val guess = guess_input.text.toString()
+            val guess = guess_input.text.toString().toLowerCase()
             guess_input.setText("")
 
             if (gamecheck.inputCount(guess)){
@@ -89,9 +90,21 @@ class TwoPlayer : AppCompatActivity() {
                     }
                     else {
                         play++
-                        player_view.text = gamecheck.playerChange(play)
+
                         wrongcount++
                         Toast.makeText(this, "Wrong letter", Toast.LENGTH_SHORT).show()
+
+                        dialogPlayer.setMessage(gamecheck.playerChange(play))
+
+                            .setCancelable(false)
+
+                            .setPositiveButton("Okay", DialogInterface.OnClickListener {
+                                    dialog, id -> dialog.cancel()
+                            })
+                        val alertPlayer = dialogPlayer.create()
+                        alertPlayer.setTitle("Its the following player turn now")
+                        alertPlayer.show()
+
                         when(wrongcount){
                             1 -> imageView.setImageResource(R.drawable.one)
                             2 -> imageView.setImageResource(R.drawable.two)
@@ -130,7 +143,11 @@ class TwoPlayer : AppCompatActivity() {
                                             dialog, id -> dialog.cancel()
                                         dialogB.setMessage(word)
                                             .setCancelable(false)
-                                            .setPositiveButton("Okay", DialogInterface.OnClickListener { dialog, which -> dialog.cancel()  })
+                                            .setPositiveButton("Okay", DialogInterface.OnClickListener {
+                                                    dialog, which ->
+                                                backtrace = 1
+                                                onBackPressed()
+                                                dialog.cancel()  })
 
                                         val alerttwo = dialogB.create()
                                         alerttwo.setTitle("The word was")
@@ -168,7 +185,10 @@ class TwoPlayer : AppCompatActivity() {
                     .setCancelable(false)
 
                     .setPositiveButton("Great", DialogInterface.OnClickListener {
-                            dialog, id -> dialog.cancel()
+                            dialog, id ->
+                        backtrace = 1
+                        onBackPressed()
+                        dialog.cancel()
                     })
 
 
@@ -196,16 +216,6 @@ class TwoPlayer : AppCompatActivity() {
                         if (gamecheck.winGame(wordview)){
                             Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
 
-                            val note = Notification.Builder(this)
-
-                            note.setContentTitle("Score")
-
-                            note.setContentText("This will tell you if u won or lost")
-
-                            val manager = NotificationManagerCompat.from(this)
-                            manager.notify(1, note.build())
-
-
                             diaogBb.setMessage(gamecheck.playerChange(play) +", WINNER! The word was, " + word)
 
                                 .setCancelable(false)
@@ -213,6 +223,7 @@ class TwoPlayer : AppCompatActivity() {
                                 .setPositiveButton("Great", DialogInterface.OnClickListener {
                                         dialog, id ->
                                     backtrace = 1
+                                    onBackPressed()
                                     dialog.cancel()
                                 })
 
@@ -249,7 +260,7 @@ class TwoPlayer : AppCompatActivity() {
             backtrace = 0
             guess_input.setText("")
             play = 0
-            player_view.text = gamecheck.playerChange(play)
+
         }
     }
 

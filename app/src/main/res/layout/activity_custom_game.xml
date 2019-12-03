@@ -9,8 +9,8 @@
     <fragment
         android:id="@+id/fragment"
         android:name="edu.towson.cosc431.christian.hangman.HangmanImage"
-        android:layout_width="404dp"
-        android:layout_height="316dp"
+        android:layout_width="400dp"
+        android:layout_height="217dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,8 +19,8 @@
     <fragment
         android:id="@+id/fragment2"
         android:name="edu.towson.cosc431.christian.hangman.HangmanGame"
-        android:layout_width="398dp"
-        android:layout_height="371dp"
+        android:layout_width="390dp"
+        android:layout_height="435dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

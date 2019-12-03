@@ -94,8 +94,9 @@ class Singleplayer : AppCompatActivity() {
 
 
         val words:String
+        val range = jsonArray.length() -1
 
-        val rand = (0..jsonArray.length()).random()
+        val rand = (0..range).random()
         words = jsonArray.getJSONObject(rand).getString("word")
 
 

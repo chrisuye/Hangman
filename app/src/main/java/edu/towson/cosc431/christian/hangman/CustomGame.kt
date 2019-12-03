@@ -9,7 +9,7 @@ import edu.towson.cosc431.christian.hangman.Interface.IGameRepo
 import edu.towson.cosc431.christian.hangman.Interface.IGameTech
 import kotlinx.android.synthetic.main.fragment_hangman_game.*
 import kotlinx.android.synthetic.main.fragment_hangman_image.*
-import okhttp3.internal.Internal
+
 
 
 class CustomGame : AppCompatActivity() {
@@ -27,7 +27,7 @@ class CustomGame : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_game)
 
-        player_view.text = "Welcome to HangMan"
+
 
         gamecheck = GameRepo()
         gameHint = GameTech()
@@ -35,7 +35,7 @@ class CustomGame : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
         val dialogB = AlertDialog.Builder(layoutInflater.context)
         val diaogBb = AlertDialog.Builder(layoutInflater.context)
-        val dialgHint = AlertDialog.Builder(layoutInflater.context)
+
 
 
         val intent = intent
@@ -55,7 +55,9 @@ class CustomGame : AppCompatActivity() {
             wordview = wordview + "_"
         }
 
+        //shows the word in this form:  _________
         word_view.text = wordview
+        //display a picture of the begining of hangman
         imageView.setImageResource(R.drawable.one)
 
 
@@ -64,9 +66,19 @@ class CustomGame : AppCompatActivity() {
         try_btn.setOnClickListener {
 
 
-            val guess = guess_input.text.toString()
+            val guess = guess_input.text.toString().toLowerCase()
             guess_input.setText("")
 
+            /*
+            the following checks the letter that has just been giving by running the following tests.
+            1: checks of the input is one letter, if not if notify the user
+            2: checks if the letter has already been used, if so we will notify the user
+            3: checks if the letter exists in the word in question
+            4: if the letter exists we replace each '_' that is the letter in question
+            5: if the letter is wrong, we will display the next image for hangman
+            6: if the user has complited each letter in the word, we will show that they have won
+            7: if the user has used up all 12 tries, we will notify then that they lost
+             */
             if (gamecheck.inputCount(guess)){
 
                 if (gamecheck.letterUsed(guess, letters)){
@@ -202,6 +214,12 @@ class CustomGame : AppCompatActivity() {
         }
 
         hint_btn.setOnClickListener {
+
+            /*
+            the player is given 3 hints
+            every time the user hits hint, we will display the closest '_' in to a letter
+            eg: he___ will become hel__
+             */
             when(hintcount){
                 3 -> {
                     Toast.makeText(this, "No more hints", Toast.LENGTH_SHORT).show()
@@ -224,7 +242,13 @@ class CustomGame : AppCompatActivity() {
 
         }
 
+
+
         restart_btn.setOnClickListener {
+
+            /*
+            this will restart the game and bring everything back to its original state
+             */
             wordview = ""
             for (elm in wordarry){
                 wordview = wordview + "_"
@@ -238,9 +262,18 @@ class CustomGame : AppCompatActivity() {
             backtrace = 0
             guess_input.setText("")
         }
+
+
+
+
+
     }
 
     override fun onBackPressed() {
+
+        /*
+        over rides the backpress to make sure that the user wants to exit the game
+         */
 
         val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
 

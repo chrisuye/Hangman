@@ -22,50 +22,66 @@ class Choice : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choice)
 
-
+        // used to change the back ground color
         colorBack()
 
 
         single_btn.setOnClickListener {
+            //starts an intent to go to the next activity to choice letter size.
+            //color is the number we use to determine the background color
             val intent = Intent(this, Singleplayer::class.java)
             intent.putExtra("color", colorChange)
             startActivity(intent)
         }
         score_btn.setOnClickListener {
+            //starts an intent to go score
+            //color is the number we use to determine the background color
             val intent = Intent(this, Score::class.java)
             intent.putExtra("color", colorChange)
             startActivity(intent)
         }
         custom_btn.setOnClickListener {
+            //starts an intent to go to the next activity to input word.
+            //color is the number we use to determine the background color
             val intent = Intent(this, CustomInput::class.java)
             intent.putExtra("color", colorChange)
             startActivity(intent)
         }
         two_btn.setOnClickListener {
-
+            //starts an intent to go to the next activity to choice letter size.
+            //color is the number we use to determine the background color
             val intent = Intent(this, TwoGame::class.java)
             intent.putExtra("color", colorChange)
             startActivity(intent)
 
         }
         l_btn.setOnClickListener{
+            //logs the user out of the game
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
         r_btn.setOnClickListener {
+            //changes the color to red
             colorChange = 1
             colorBack()
         }
         b_btn.setOnClickListener {
+            //change color to blue
             colorChange = 2
             colorBack()
         }
         ba_btn.setOnClickListener {
+            //change color to black
             colorChange = 3
             colorBack()
         }
+        white_btn.setOnClickListener {
+            //change color to white
+            colorChange = 0
+            colorBack()
+        }
     }
-
+    //this function controls the back ground color
     fun colorBack(){
         when(colorChange){
             0 -> choice_layout.setBackgroundColor(Color.WHITE)
@@ -74,12 +90,10 @@ class Choice : AppCompatActivity() {
             3 -> choice_layout.setBackgroundColor(Color.BLACK)
         }
     }
-
+    //we check for activity onpause and if it is paused for long we send a notification
     override fun onPause() {
         super.onPause()
         val j = Intent(this, MyIntentService::class.java)
         startService(j)
-
-        //unregisterReceiver(receiver)
     }
 }

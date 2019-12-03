@@ -27,13 +27,13 @@ class CustomInput : AppCompatActivity() {
 
             if (word_input.text.length >= 5) {
 
-                val word = word_input.text.toString()
+                val word = word_input.text.toString().toLowerCase()
 
                 word_input.setText("")
-                val intent = Intent(this, CustomGame::class.java)
-                intent.putExtra("Word", word)
+                val intent2 = Intent(this, CustomGame::class.java)
+                intent2.putExtra("Word", word)
 
-                startActivity(intent)
+                startActivity(intent2)
 
             }
             else{

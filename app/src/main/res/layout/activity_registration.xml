@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/registration_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/registration_layout"
-    android:layout_margin="15dp">
+    android:layout_margin="15dp"
+    android:background="#A1046C99"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/name"
-        android:hint="UserName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="UserName" />
 
     <EditText
         android:id="@+id/password_registration"
-        android:hint="Password"
-        android:inputType="textPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
-        android:text="save"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"/>
+        android:background="#4CAF50"
+        android:text="save" />
 
 </LinearLayout>
