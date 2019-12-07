@@ -33,6 +33,13 @@ class ExampleUnitTest {
     @Test
     fun hintTestThree(){
         gameHint = GameTech()
+        val hint = gameHint.hint("h__llo", "hey")
+
+        assertEquals("he_llo", hint)
+    }
+    @Test
+    fun hintTestFour(){
+        gameHint = GameTech()
         val hint = gameHint.hint("hey", "hey")
 
         assertEquals(null, hint)
