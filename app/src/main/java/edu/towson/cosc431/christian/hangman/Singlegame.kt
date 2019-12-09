@@ -19,6 +19,7 @@ class Singlegame : AppCompatActivity() {
     private var backPress:Long = 0
     var backtrace = 0
     var hintcount = 0
+    var wrongcount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class Singlegame : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
         val dialogB = AlertDialog.Builder(layoutInflater.context)
         val diaogBb = AlertDialog.Builder(layoutInflater.context)
+        val dialogRestart = AlertDialog.Builder(layoutInflater.context)
 
         val intent = intent
 
@@ -48,9 +50,21 @@ class Singlegame : AppCompatActivity() {
         }
 
         word_view.text = wordview
-        var wrongcount = 0
+
+        imageView.setImageResource(R.drawable.white)
 
         try_btn.setOnClickListener {
+
+            /*
+            the following checks the letter that has just been giving by running the following tests.
+            1: checks of the input is one letter, if not if notify the user
+            2: checks if the letter has already been used, if so we will notify the user
+            3: checks if the letter exists in the word in question
+            4: if the letter exists we replace each '_' that is the letter in question
+            5: if the letter is wrong, we will display the next image for hangman
+            6: if the user has complited each letter in the word, we will show that they have won
+            7: if the user has used up all 12 tries, we will notify then that they lost
+             */
 
             val guess = guess_input.text.toString().toLowerCase()
             guess_input.setText("")
@@ -219,8 +233,6 @@ class Singlegame : AppCompatActivity() {
 
                             alert.show()
                         }
-                    }else {
-                        Toast.makeText(this, "No", Toast.LENGTH_SHORT).show()
                     }
 
                     hintcount++
@@ -231,18 +243,39 @@ class Singlegame : AppCompatActivity() {
         }
 
         restart_btn.setOnClickListener {
-            wordview = ""
-            for (elm in wordarry){
-                wordview = wordview + "_"
-            }
+            dialogRestart.setMessage("Are you sure?")
 
-            word_view.text = wordview
-            imageView.setImageResource(R.drawable.one)
-            letters = ""
-            showtry_view.text = letters
-            hintcount = 0
-            backtrace = 0
-            guess_input.setText("")
+                .setCancelable(false)
+
+                .setPositiveButton("RESTART", DialogInterface.OnClickListener {
+                        dialog, id ->
+                    wordview = ""
+                    for (elm in wordarry){
+                        wordview = wordview + "_"
+                    }
+
+                    word_view.text = wordview
+                    imageView.setImageResource(R.drawable.white)
+                    letters = ""
+                    showtry_view.text = letters
+                    hintcount = 0
+                    backtrace = 0
+                    wrongcount = 0
+                    guess_input.setText("")
+
+                    dialog.cancel()
+                })
+
+                .setNegativeButton("No", DialogInterface.OnClickListener {
+                        dialog, id -> dialog.cancel()
+                })
+
+
+            val alert = dialogRestart.create()
+
+            alert.setTitle("Hangman")
+
+            alert.show()
         }
 
     }

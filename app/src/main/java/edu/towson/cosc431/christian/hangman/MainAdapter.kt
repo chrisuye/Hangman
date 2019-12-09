@@ -8,6 +8,10 @@ import kotlinx.android.synthetic.main.score.view.*
 
 class MainAdapter(val names:ArrayList<Table>): RecyclerView.Adapter<CustomViewHolder>() {
 
+    /*
+    recycler view that is used for displaying the score
+     */
+
 
     override fun getItemCount(): Int {
 

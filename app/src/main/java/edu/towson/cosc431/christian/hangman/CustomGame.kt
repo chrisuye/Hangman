@@ -19,6 +19,7 @@ class CustomGame : AppCompatActivity() {
     private var backPress:Long = 0
     var backtrace = 0
     var wrongcount = 0
+    var hintcount = 0
 
 
 
@@ -35,6 +36,7 @@ class CustomGame : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(layoutInflater.context)
         val dialogB = AlertDialog.Builder(layoutInflater.context)
         val diaogBb = AlertDialog.Builder(layoutInflater.context)
+        val dialogRestart = AlertDialog.Builder(layoutInflater.context)
 
 
 
@@ -43,11 +45,10 @@ class CustomGame : AppCompatActivity() {
 
 
 
-        var hintcount = 0
+
         println(word)
         var letters : String = ""
         var wordview = ""
-        backtrace = 0
 
         val wordarry = word.toCharArray()
 
@@ -58,7 +59,7 @@ class CustomGame : AppCompatActivity() {
         //shows the word in this form:  _________
         word_view.text = wordview
         //display a picture of the begining of hangman
-        imageView.setImageResource(R.drawable.one)
+        imageView.setImageResource(R.drawable.white)
 
 
 
@@ -229,8 +230,29 @@ class CustomGame : AppCompatActivity() {
                     if (temphint != null){
                         wordview = temphint
                         word_view.text = wordview
-                    }else {
-                        Toast.makeText(this, "No", Toast.LENGTH_SHORT).show()
+
+                        if (gamecheck.winGame(wordview)){
+                            backtrace = 1
+                            Toast.makeText(this, "WINNER WINNER!!!!!!", Toast.LENGTH_SHORT).show()
+
+                            diaogBb.setMessage("WINNER! The word was, " + word)
+
+                                .setCancelable(false)
+
+                                .setPositiveButton("Great", DialogInterface.OnClickListener {
+                                        dialog, id ->
+                                    onBackPressed()
+                                    dialog.cancel()
+                                })
+
+
+
+                            val alert = diaogBb.create()
+
+                            alert.setTitle("Custom Game")
+
+                            alert.show()
+                        }
                     }
 
                     hintcount++
@@ -238,6 +260,7 @@ class CustomGame : AppCompatActivity() {
 
                 }
             }
+
 
 
         }
@@ -249,18 +272,39 @@ class CustomGame : AppCompatActivity() {
             /*
             this will restart the game and bring everything back to its original state
              */
-            wordview = ""
-            for (elm in wordarry){
-                wordview = wordview + "_"
-            }
+            dialogRestart.setMessage("Are you sure?")
 
-            word_view.text = wordview
-            imageView.setImageResource(R.drawable.one)
-            letters = ""
-            showtry_view.text = letters
-            hintcount = 0
-            backtrace = 0
-            guess_input.setText("")
+                .setCancelable(false)
+
+                .setPositiveButton("RESTART", DialogInterface.OnClickListener {
+                        dialog, id ->
+                    wordview = ""
+                    for (elm in wordarry){
+                        wordview = wordview + "_"
+                    }
+
+                    word_view.text = wordview
+                    imageView.setImageResource(R.drawable.white)
+                    letters = ""
+                    showtry_view.text = letters
+                    hintcount = 0
+                    backtrace = 0
+                    wrongcount = 0
+                    guess_input.setText("")
+
+                    dialog.cancel()
+                })
+
+                .setNegativeButton("No", DialogInterface.OnClickListener {
+                        dialog, id -> dialog.cancel()
+                })
+
+
+            val alert = dialogRestart.create()
+
+            alert.setTitle("Hangman")
+
+            alert.show()
         }
 
 

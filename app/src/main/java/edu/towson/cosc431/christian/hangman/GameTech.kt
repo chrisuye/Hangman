@@ -4,6 +4,10 @@ import edu.towson.cosc431.christian.hangman.Interface.IGameTech
 
 class GameTech :IGameTech{
 
+    /*
+    this is the place where we implemented IGameHint. the rest is self explanatory
+     */
+
     override fun hint(wordView: String, word: String): String? {
 
         val wordviewarray = wordView.toCharArray()

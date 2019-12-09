@@ -16,6 +16,11 @@ import kotlinx.android.synthetic.main.activity_registration.*
 
 class Registration : AppCompatActivity() {
 
+    /*
+    this is the registration page. we check if the username exists first. if it does not exist,
+    the data base is updated and the user is logged in. the user will also get a notification
+     */
+
     lateinit var handler:UserDataBase
     lateinit var notificationChannel: NotificationChannel
     lateinit var notificationManager: NotificationManager

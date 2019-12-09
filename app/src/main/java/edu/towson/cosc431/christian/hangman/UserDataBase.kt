@@ -6,6 +6,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class UserDataBase(context: Context): SQLiteOpenHelper(context,dbname, factory, version) {
+
+    /*
+    the data base for username, password and score
+     */
     override fun onCreate(p0: SQLiteDatabase?) {
         p0?.execSQL("create table user (id integer primary key autoincrement,"+
                 "name varchar(30), password varchar(20))")

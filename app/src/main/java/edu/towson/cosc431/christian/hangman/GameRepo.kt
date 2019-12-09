@@ -5,6 +5,10 @@ import edu.towson.cosc431.christian.hangman.Interface.IGameRepo
 
 class GameRepo:IGameRepo{
 
+    /*
+    this is the place where we implemented IGameRepo. the rest is self explanatory
+     */
+
 
     override fun inputCount(input: String): Boolean {
         if(input.length > 1){
@@ -27,12 +31,15 @@ class GameRepo:IGameRepo{
 
 
         val wordarray = word.toCharArray()
+
         for (i in wordarray){
-            if (input == i.toString()){
+
+            if (input == i.toString()) {
                 return true
             }
 
         }
+
         return false
     }
 

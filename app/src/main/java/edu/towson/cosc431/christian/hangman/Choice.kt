@@ -13,7 +13,7 @@ class Choice : AppCompatActivity() {
 
     val receiver: BroadcastReceiver = object: BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
-            //serviceBtn.text = "DONE!"
+
         }
     }
 

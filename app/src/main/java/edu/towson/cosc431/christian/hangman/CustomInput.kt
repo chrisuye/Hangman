@@ -15,6 +15,8 @@ class CustomInput : AppCompatActivity() {
         setContentView(R.layout.activity_custom_input)
 
         val intent = intent
+
+        //Change background
         val colorChange = intent.getIntExtra("color", 0)
         when(colorChange){
             0 -> custom_layout.setBackgroundColor(Color.WHITE)
@@ -22,6 +24,11 @@ class CustomInput : AppCompatActivity() {
             2 -> custom_layout.setBackgroundColor(Color.BLUE)
             3 -> custom_layout.setBackgroundColor(Color.BLACK)
         }
+
+        /*
+        Input word for the game. the word will be converted to lower case and checked if it is more
+        more than 4 letters. then the information will be passed through intent
+         */
 
         start_btn.setOnClickListener {
 

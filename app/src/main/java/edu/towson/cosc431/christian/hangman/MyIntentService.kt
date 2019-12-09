@@ -15,7 +15,10 @@ class MyIntentService : IntentService("MyIntentService") {
 
     override fun onHandleIntent(intent: Intent?) {
 
+        maybeCancelNotification()
+
         Thread.sleep(10000)
+
         showNotification()
 
     }
@@ -24,16 +27,26 @@ class MyIntentService : IntentService("MyIntentService") {
         val intent = Intent(this,Choice::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
-        val builder = NotificationCompat.Builder(this, NOTIF_CHANNEL_ID)
-            .setContentTitle("HangMan")
-            .setContentText("Continue playing the game")
-            .setSmallIcon(android.R.drawable.btn_default)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-        val notification = builder.build()
 
-        NotificationManagerCompat.from(this)
-            .notify(NOTIF_ID, notification)
+        if(application is MyApplication){
+            val app = application as MyApplication
+
+            if(app.isChoiceAcivityStoped){
+                val builder = NotificationCompat.Builder(this, NOTIF_CHANNEL_ID)
+                    .setContentTitle("HangMan")
+                    .setContentText("Continue playing the game")
+                    .setSmallIcon(android.R.drawable.btn_default)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                val notification = builder.build()
+
+                NotificationManagerCompat.from(this)
+                    .notify(NOTIF_ID, notification)
+            }
+        }
+
+
+
     }
 
     private fun maybeCancelNotification() {

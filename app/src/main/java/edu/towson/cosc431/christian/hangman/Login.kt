@@ -16,6 +16,11 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
 
+    /*
+    this is the login activity where we check the username and password
+    we will send a notification if the user has logged in correctly
+     */
+
     lateinit var handler:UserDataBase
 
     lateinit var notificationChannel: NotificationChannel

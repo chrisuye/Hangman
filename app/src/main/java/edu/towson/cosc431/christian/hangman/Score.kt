@@ -8,6 +8,10 @@ import kotlinx.android.synthetic.main.activity_score.*
 
 class Score : AppCompatActivity() {
 
+    /*
+    show score by connecting to the data base and populating the recycler view
+     */
+
 
     lateinit var handler:UserDataBase
 
